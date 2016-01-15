@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 
-// import TodoList from './components/todo_list';
-
-// import TodoListItem from './todo_list_item';
-
-
 class AddTodoButton extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { term: ''};
+		this.state = { text: '', state:'active'};
 	}
 
 	render() {
@@ -17,10 +12,10 @@ class AddTodoButton extends Component {
 			<div className="addTodo-bar">
 				<input 
 					id = 'input_id'
-					onChange={event=>this.setState({ term: event.target.value})}
+					onChange={event=>this.setState({ text: event.target.value})}
 				/>
 				<button 
-					onClick= {(event) => this.onClickAction(this.state.term)} 
+					onClick= {(event) => this.onClickAction(this.state)} 
 				>
 					Add ToDo
 				</button> 
@@ -29,9 +24,9 @@ class AddTodoButton extends Component {
 		)
 	}
 
-	onClickAction(term) {
-		this.setState({term})
-		this.props.onNewTodoAdded(term);
+	onClickAction(state) {
+		this.setState(state)
+		this.props.onNewTodoAdded(state);
 		document.getElementById('input_id').value='';
 	}
 };

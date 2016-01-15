@@ -1,24 +1,42 @@
 import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
 import TodoListItem from './todo_list_item';
-import TodoFilter from './todo_filter'
+import RandomId from 'random-id'
 
-const TodoList = (props) => {
-	const TodoItems = props.existingTodos.map((todo) => {
-		return <TodoListItem
-			key={todo}
-			todo={todo}
-		/>
-	})
+class TodoList extends Component {
 
-	return (
-		<ul className="col-md-4 list-group">
-			<div>
-				{TodoItems}
-			</div>
-		</ul>
-	)
+	constructor(props){
+		super(props);
+	}
+
+	render(){
+		var self = this; 
+
+		let i=0;
+		const TodoItems = self.props.existingTodos.map((todo) => {
+			console.log('a',i, '    ',this.props.existingTodos[i])
+			const changedState = function(newState){
+				todo.state = newState;
+				self.props.reload(newState);
+			}
+			return <TodoListItem
+				key={todo.text}
+				todo={todo}
+				changer={changedState}
+				filterType={self.props.handleVisibility}
+			/>
+			i++;
+
+		})
+
+		return (
+			<ul className="col-md-4 list-group">
+				<div>
+					{TodoItems}
+				</div>
+			</ul>
+		)
+	}
+
 }
-
 
 export default TodoList;

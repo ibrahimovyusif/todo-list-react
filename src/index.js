@@ -13,9 +13,9 @@ class App extends Component {
 		this.state = { todos: [], filterType:'all' };
 	}
 
-	addTodo(term) {
+	addTodo(newTodo) {
 
-		this.state.todos.push(term);
+		this.state.todos.push(newTodo);
 		
 		this.setState({
 			todos: this.state.todos
@@ -23,7 +23,6 @@ class App extends Component {
 	}
 
 	filterTodos(filterType) {
-		console.log('aaa ', filterType)
 		this.state.filterType = filterType;
 
 		this.setState({
@@ -31,18 +30,22 @@ class App extends Component {
 		})
 	}
 
-	render() {
-		console.log(this.state.filterType)
-		if(this.state.filterType==='all'){
+	reloader(newTodoState){
 
-			return (
-				<div>
-					<AddTodoBar onNewTodoAdded={term=> this.addTodo(term)} />
-					<TodoList  existingTodos={this.state.todos} />
-					<TodoFilter onFilterAction={(filterType) => this.filterTodos(filterType)}/>
-				</div>
-			)
-		}
+		this.setState({
+			todos: this.state.todos
+		})
+	}
+
+	render() {
+
+		return (
+			<div>
+				<AddTodoBar onNewTodoAdded={newTodo=> this.addTodo(newTodo)} />
+				<TodoList reload={newTodoState => this.reloader(newTodoState)} existingTodos={this.state.todos} handleVisibility={this.state.filterType}/>
+				<TodoFilter onFilterAction={filterType => this.filterTodos(filterType)}/>
+			</div>
+		)
 	}
 }
 
