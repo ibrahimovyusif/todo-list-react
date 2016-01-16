@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 
+const STATE_ACTIVE = 'active';
+const STATE_DONE = 'done';
+
+
 class TodoListItem extends Component {
-	constructor(props) {
-		super(props);
-	}
 
 	render(){
 
-		if(this.props.todo.state === 'active' && (this.props.filterType === 'active' || this.props.filterType === 'all')){
+		if(this.props.todo.state === STATE_ACTIVE){
 			return (
 				<li>
 					<div onClick={ this.onClickTodo.bind(this)} className="withoutLineTodo" id="my-div-1">
@@ -16,7 +17,7 @@ class TodoListItem extends Component {
 				</li>
 			)
 		}
-		else if(this.props.todo.state === 'done' && (this.props.filterType === 'done' || this.props.filterType === 'all')){
+		else{
 			return (
 				<li>
 					<div onClick={ this.onClickTodo.bind(this)} className="withLineTodo" id="my-div-2">
@@ -25,24 +26,15 @@ class TodoListItem extends Component {
 				</li>
 			)
 		}
-		else {
-			return (
-				<li>
-					<div onClick={ this.onClickTodo.bind(this)} className={this.props.filterType ? "withoutLineTodo" : "withLineTodo"}>
-					</div>
-				</li>
-			)
-		}
 	}
 
 	onClickTodo(){
-		if(this.props.todo.state === 'active'){
-			this.props.changer('done')
+
+		if(this.props.todo.state === STATE_ACTIVE){
+			this.props.changeState(STATE_DONE)
 		}
-		else if(this.props.todo.state === 'done'){
-			this.props.changer('active')
-
-
+		else if(this.props.todo.state === STATE_DONE){
+			this.props.changeState(STATE_ACTIVE)
 		}
 	}
 

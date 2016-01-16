@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
+const STATE_ACTIVE = 'active';
+
 class AddTodoButton extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { text: '', state:'active'};
+		this.state = { text: '', state: STATE_ACTIVE};
 	}
 
 	render() {

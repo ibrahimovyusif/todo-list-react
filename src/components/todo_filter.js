@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+const FILTERTYPE_ALL = 'all';
+const FILTERTYPE_ACTIVE = 'active';
+const FILTERTYPE_DONE = 'done';
 
 
 class todoFilter extends Component {
@@ -9,7 +12,9 @@ class todoFilter extends Component {
 	}
 
 	render() {
+
 		return (
+
 			<div  className="filterButtons">
 				<button onClick={this.showAll.bind(this)}>Show All</button>
 				<button onClick={this.showActive.bind(this)}>Show Active</button>
@@ -19,13 +24,13 @@ class todoFilter extends Component {
 	}
 
 	showAll(){
-		this.props.onFilterAction('all');
+		this.props.onFilterAction(FILTERTYPE_ALL);
 	}
 	showActive(){
-		this.props.onFilterAction('active');
+		this.props.onFilterAction(FILTERTYPE_ACTIVE);
 	}
 	showDone(){
-		this.props.onFilterAction('done');
+		this.props.onFilterAction(FILTERTYPE_DONE);
 	}
 }
 

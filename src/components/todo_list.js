@@ -11,20 +11,18 @@ class TodoList extends Component {
 	render(){
 		var self = this; 
 
-		let i=0;
 		const TodoItems = self.props.existingTodos.map((todo) => {
-			console.log('a',i, '    ',this.props.existingTodos[i])
+			
 			const changedState = function(newState){
 				todo.state = newState;
-				self.props.reload(newState);
+				self.props.reloadNewState(newState);
 			}
 			return <TodoListItem
 				key={todo.text}
 				todo={todo}
-				changer={changedState}
+				changeState={changedState}
 				filterType={self.props.handleVisibility}
 			/>
-			i++;
 
 		})
 
